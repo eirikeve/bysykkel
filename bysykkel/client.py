@@ -19,9 +19,11 @@ class BysykkelClient:
         Oslo Bysykkel: https://oslobysykkel.no/apne-data/sanntid
     """
 
-    def __init__(self, base_url: str) -> None:
+    def __init__(
+        self, base_url: str, client_identifier: str = "eirikeve-bysykkel"
+    ) -> None:
         self.base_url = urlparse(base_url)
-        self.session = AsyncClient(headers={"Client-Identifier": "eirikeve-bysykkel"})
+        self.session = AsyncClient(headers={"Client-Identifier": client_identifier})
         self.logger = getLogger(type(self).__name__)
         self.logger.info(f"Initialized with base_url {base_url}")
 

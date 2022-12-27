@@ -23,7 +23,10 @@ app = FastAPI(title=settings.app_name)
 
 
 def client():
-    return BysykkelClient(settings.oslobysykkel_apiurl)
+    client_identifier = f"eirikeve-bysykkel-{settings.env}"
+    return BysykkelClient(
+        settings.oslobysykkel_apiurl, client_identifier=client_identifier
+    )
 
 
 def _filter_predicate(field: str, comparison: str):
