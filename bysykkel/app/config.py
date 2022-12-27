@@ -15,11 +15,11 @@ class Settings(BaseSettings):
         Pydantic BaseSettings: https://docs.pydantic.dev/usage/settings/
     """
 
-    app_name: str
-    host: str
-    port: int
-    env: Literal["dev", "staging", "prod"]
-    oslobysykkel_apiurl: AnyUrl
+    app_name: str = "App"
+    host: str = "127.0.0.1"
+    port: int = 8000
+    env: Literal["dev", "staging", "prod"] = "dev"
+    oslobysykkel_apiurl: AnyUrl = "https://gbfs.urbansharing.com/oslobysykkel.no"  # type: ignore
 
     class Config:
         env_prefix = "BYSYKKEL_"
