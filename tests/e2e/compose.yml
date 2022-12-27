@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  bysykkel:
+    image: "eirikeve/bysykkel"
+    build:
+      dockerfile: Dockerfile
+      context: ../..
+    environment:
+      - BYSYKKEL_APP_NAME=Bysykkel REST API
+      - BYSYKKEL_HOST=0.0.0.0
+      - BYSYKKEL_PORT=8000
+      - BYSYKKEL_ENV=dev
+      - BYSYKKEL_OSLOBYSYKKEL_APIURL=https://gbfs.urbansharing.com/oslobysykkel.no
+    ports:
+      - 8000:8000
+
+    command: python bysykkel/app/main.py
+
+  testrunner:
+    image: "eirikeve/bysykkel"
+    build:
+      dockerfile: Dockerfile
+      context: ../..
+    environment:
+      - BYSYKKEL_E2E_TEST_HOST=http://bysykkel:8000
+
+    command: pytest
