@@ -190,4 +190,5 @@ async def redirect_root_to_docs():
 if __name__ == "__main__":
     import uvicorn
 
+    # TODO: Uvicorn isn't suited for prod, should be updated to use gunicorn in prod
     uvicorn.run(app, host=settings.host, port=settings.port)

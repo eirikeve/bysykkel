@@ -1,6 +1,5 @@
 from typing import Literal
 
-from fastapi import FastAPI
 from pydantic import BaseSettings, AnyUrl
 
 

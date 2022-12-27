@@ -26,6 +26,7 @@ class BysykkelClient:
         self.session = AsyncClient(headers={"Client-Identifier": client_identifier})
         self.logger = getLogger(type(self).__name__)
         self.logger.info(f"Initialized with base_url {base_url}")
+        # TODO: Add more (granular) logging
 
     def url(self, endpoint: str) -> str:
         endpoint = endpoint.removeprefix("/")
