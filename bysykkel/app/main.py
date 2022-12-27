@@ -169,6 +169,19 @@ async def get_station(
     raise HTTPException(404, detail=f"Station not found: {id}")
 
 
+@app.get("/live")
+def live():
+    "Liveness probe"
+    return {"live": True}
+
+
+@app.get("/ready")
+def ready():
+    "Readiness probe"
+    # No setup required as the app is stateless.
+    return {"ready": True}
+
+
 @app.get("/")
 async def redirect_root_to_docs():
     return RedirectResponse("/docs")
