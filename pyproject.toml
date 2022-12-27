@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bysykkel"
+description = "Oslo Bysykkel Sanntidsklient"
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = []
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "requests-async~=0.6.2",
+    "typer~=0.7.0",
+    "fastapi~=0.88.0",
+    "pydantic~=1.10.2"
+
+]
+dynamic = ["version"]
+
+[project.scripts]
+bysykkel = "bysykkel.cli.main:app"
