@@ -31,6 +31,7 @@ class BysykkelClient:
         return self.base_url._replace(path=full_path).geturl()
 
     async def get_station_information(self) -> StationInfoResponse:
+        """Query for info/metadata of the available city bike stations."""
         url: str = self.url("/station_information.json")
         self.logger.info(f"GET: {url}")
         response = await self.session.get(url)
@@ -39,6 +40,8 @@ class BysykkelClient:
         return parse_obj_as(StationInfoResponse, response.json())
 
     async def get_station_status(self) -> StationStatusReponse:
+        """Query for the current status of the available city bike stations."""
+
         url = self.url("/station_status.json")
         self.logger.info(f"GET: {url}")
         response = await self.session.get(url)
@@ -47,6 +50,11 @@ class BysykkelClient:
         return parse_obj_as(StationStatusReponse, response.json())
 
     async def get_stations(self) -> List[StationData]:
+        """Query for info/metadata and current status for the available city bike stations.
+
+        The station info and station status are merged by id, so all data for each station is contained in one object.
+        """
+
         status = await self.get_station_status()
         info = await self.get_station_information()
 
