@@ -5,6 +5,7 @@
 ## Project structure
 
 ```txt
+.env            # Project configuration
 bysykkel/       # Source code
 bysykkel/app    # Source code for the REST API
 bysykkel/cli    # Source code for the CLI
