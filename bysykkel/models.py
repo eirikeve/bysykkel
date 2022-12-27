@@ -67,3 +67,9 @@ class StationStatusReponse(BaseModel):
 
     last_updated: datetime
     data: StationStatuses
+
+
+class StationData(StationInfo, StationStatus):
+    """Metadata and current status of an Oslo Bysykkel bike station"""
+
+    pass
