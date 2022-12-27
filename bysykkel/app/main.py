@@ -1,6 +1,6 @@
 from typing import Literal, List
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import RedirectResponse
 from pydantic import BaseSettings, AnyUrl
 from dotenv import load_dotenv
@@ -24,6 +24,17 @@ def client():
 @app.get("/v1/stations", response_model=List[StationData])
 async def get_stations(client: BysykkelClient = Depends(client)):
     return await client.get_stations()
+
+
+@app.get("/v1/station/{id}", response_model=StationData)
+async def get_station(id: str, client: BysykkelClient = Depends(client)):
+    stations = await client.get_stations()
+    for station in stations:
+        # TODO: We already order the stations by id in the client,
+        # if we expose that dict we could get rid of this loop
+        if station.station_id == id:
+            return station
+    raise HTTPException(404, detail=f"Station not found: {id}")
 
 
 @app.get("/")
