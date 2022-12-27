@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, BaseConfig
 
 
 class StationInfo(BaseModel):
@@ -73,3 +73,22 @@ class StationData(StationInfo, StationStatus):
     """Metadata and current status of an Oslo Bysykkel bike station"""
 
     pass
+
+
+class PartialStationData(StationData):
+    """Subset of metadata and status fields of an Oslo Bysykkel bike station."""
+
+    station_id: Optional[str]
+    # Station info:
+    is_installed: Optional[int]
+    is_renting: Optional[int]
+    is_returning: Optional[int]
+    num_bikes_available: Optional[int]
+    num_docks_available: Optional[int]
+    last_reported: Optional[datetime]
+    # Station status:
+    name: Optional[str]
+    address: Optional[str]
+    lat: Optional[float]
+    lon: Optional[float]
+    capacity: Optional[int]

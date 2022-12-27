@@ -1,6 +1,5 @@
 import asyncio
 
-from pydantic import AnyUrl
 from rich.table import Table
 from rich.console import Console
 from rich import box
